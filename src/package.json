@@ -12,7 +12,10 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check": "npm run typecheck && npm run lint && npm run format:check"
+    "check": "npm run typecheck && npm run lint && npm run format:check",
+    "postinstall": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:deploy": "prisma migrate deploy"
   },
   "keywords": [],
   "author": "",
@@ -37,5 +40,8 @@
     "tsx": "^4.23.15",
     "typescript": "~5.9",
     "typescript-eslint": "^8.71.1"
+  },
+  "overrides": {
+    "deepmerge-ts": "^8.0.2"
   }
 }

@@ -1,0 +1,12 @@
+**/node_modules
+**/dist
+**/.env
+**/.env.*
+!**/.env.example
+.git
+.github
+.prova
+exams
+docs
+scripts
+tests
