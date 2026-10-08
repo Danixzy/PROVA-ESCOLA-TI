@@ -19,6 +19,8 @@ services:
     build:
       context: .
       dockerfile: Containerfile
+    environment:
+      DATABASE_URL: postgresql://app:app@db:5432/app?schema=public
     ports:
       - '8080:8080'
     depends_on:
