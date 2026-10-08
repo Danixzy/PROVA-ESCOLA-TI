@@ -2,9 +2,9 @@
 
 # ALUNO
 
-Nome: Daniel Andrade
+Nome: Daniel Andrade Mendonça
 
-RA: >>> PREENCHER <<<
+RA: >>> 230003972 <<<
 
 Conta GitHub: @Danixzy
 
