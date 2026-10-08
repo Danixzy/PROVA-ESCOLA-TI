@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TipoSenha {
+  normal
+  preferencial
+}
+
+enum StatusSenha {
+  aguardando
+  chamada
+  concluida
+  cancelada
+}
+
+model Senha {
+  id           Int         @id @default(autoincrement()) // ordem de emissão (FIFO)
+  codigo       String // ex.: C007 — repete em dias diferentes
+  dia          String // AAAA-MM-DD no fuso -03:00 (reinício diário da sequência)
+  tipo         TipoSenha
+  status       StatusSenha @default(aguardando)
+  emissao      DateTime    @db.Timestamptz(3)
+  chamadaEm    DateTime?   @db.Timestamptz(3)
+  ordemChamada Int? // contador crescente: ordena o painel (rechamar atualiza)
+
+  @@unique([dia, codigo]) // o banco garante que o código nunca repete no dia
+  @@index([status, tipo, id])
+  @@index([ordemChamada])
+}
+
+// Contadores persistentes: "seq:AAAA-MM-DD", "ciclo_pref", "ordem_chamada"
+model Contador {
+  chave String @id
+  valor Int    @default(0)
+}
